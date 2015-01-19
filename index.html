@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mad Math Minute - addition, multiplication teaching tool">
+    <title>Mad Math Minute!</title>
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mmm.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div style='display:none;' class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Mad Math Minute!</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <input type='text' id='txtAnswer' style='display:none' />
+
+    <div class="full-width " style="background-color: #c0c0c0; font-size: x-large; height: 1.5em; color: #fff;">
+	    <div class="timer" style="float: left; padding-left: 20px">
+        Time Remaining: <span id='showTime'></span></div>
+    	<div class="score" style="float: left; text-align: right; float: right; padding-right: 20px">
+        <span id='countCorrect'></span>
+        &nbsp;&nbsp;&nbsp;
+        <span id='countWrong'></span>
+    	</div>
+    </div>
+
+    <div style="clear: both"></div>
+
+    <div class="full-width game-off" style="text-align: center; font-size: large; height: 1.2em; color: #fff; margin-top: 100px;">
+        <button onclick='newGame(); return false;'>Start a New Game</button>
+    </div>
+
+    <div style="clear: both"></div>
+
+    <div class="container game-on">
+
+    <h1 class='game-on' style="text-align: center">
+        <span id='n1'></span>&nbsp;
+        <span id='operator'></span>&nbsp;
+        <span id='n2'></span>
+        =
+        <span id='displayAnswer'></span>
+    </h1>
+
+    <div class="keyboard">
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+		    <button onclick='handlekeyclick("1");'>1</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("2");'>2</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("3");'>3</button>
+        </div>
+	</div>
+
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("4");'>4</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("5");'>5</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("6");'>6</button>
+        </div>
+	</div>
+
+
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("7");'>7</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("8");'>8</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("9");'>9</button>
+        </div>
+	</div>
+
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button class="btn btn-danger" onclick='handlekeyclick("DEL");'>DEL</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("0");'>0</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button class="btn btn-success" onclick='handlekeyclick("ANSWER");'>OK</button>
+        </div>
+	</div>
+
+    </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>   
+
+    <script src="./js/main.js"></script>  
+    </body>
+</html>
+

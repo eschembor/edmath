@@ -143,6 +143,12 @@ function handlekeyclick (k) {
 	}
 }
 
-$(function() {
-	FastClick.attach(document.body);
+//$(function() {
+//	FastClick.attach(document.body);
+//});
+
+var b = document.getElementById('btn1');
+var h = new Hammer(b);
+h.on ('tap', function(ev) {
+	handlekeyclick ("1");
 });

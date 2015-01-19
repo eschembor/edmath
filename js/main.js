@@ -8,7 +8,7 @@ var game = function () {
 		thisN1,
 		thisN2,
 		operation ='*',
-		maxOperand = 10,
+		maxOperand = 12,
 		liveTimer,
 		gameState;
 	
@@ -36,7 +36,7 @@ var game = function () {
 
 	var eachSecond = function() {
 		// update the time on screen and check for one minute done
-		var remaining  = 12 - Math.round (((new Date()) - startTime)  / 1000);
+		var remaining  = 60 - Math.round (((new Date()) - startTime)  / 1000);
 		updateBGColor (remaining);
 		$("#showTime").html ("0:" + remaining);
 		if (remaining > 0) {

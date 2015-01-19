@@ -2,7 +2,7 @@
 	width: 99%;
 	height: 80px;
 	border: 2px solid #909090;
-	margin-bottom: 20px;
+	margin-bottom: 8px;
 }
 
 .game-on {
@@ -19,4 +19,10 @@
 
 #countWrong {
 	color: #FF0000;
+}
+
+/* Override */
+.col-xs-4, .col-sm-4 {
+	padding-left: 1px;
+	padding-right: 1px;
 }

@@ -74,6 +74,9 @@ var game = function () {
 		$(".game-on").hide();
 		$(".keyboardrow div").css ("background-color", "#fff");
 		gameState = 0;
+		$("#dlgCorrectCount").html('' + countCorrect);
+		$("#dlgWrongCount").html('' + countWrong);		
+		$("#modelResultsDlg").modal('show');
 	}
 
 	var handlekeyclick = function (k) {

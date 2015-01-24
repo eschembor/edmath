@@ -34,20 +34,32 @@
 
     <input type='text' id='txtAnswer' style='display:none' />
 
-    <div class="full-width " style="background-color: #c0c0c0; font-size: x-large; height: 1.5em; color: #fff;">
+    <div class="full-width game-off" style="text-align: center; background-color: #c0c0c0; font-size: x-large; height: 1.5em; color: #000; font-weight: bold;">
+    Big A's Triple-M (Mad Math Minute)
+    </div>
+
+    <div class="full-width game-on" style="background-color: #c0c0c0; font-size: x-large; height: 1.5em; color: #fff;">
 	    <div class="timer" style="float: left; padding-left: 20px">
-        4Time Remaining: <span id='showTime'></span></div>
+            <span style='margin-top: 2px;' class="glyphicon glyphicon-time game-on"></span>&nbsp;
+            <span id='showTime' class='game-on'></span>
+        </div>
+
     	<div class="score" style="float: left; text-align: right; float: right; padding-right: 20px">
-        <span id='countCorrect'></span>
-        &nbsp;&nbsp;&nbsp;
-        <span id='countWrong'></span>
+            <span style='margin-top: 4px; color: #008000;' class="glyphicon glyphicon-thumbs-up game-on"></span>&nbsp;
+            <span class='game-on' id='countCorrect'></span>
+            &nbsp;&nbsp;&nbsp;
+            <span style='margin-top: 4px; color: #ff0000;' class="glyphicon glyphicon-thumbs-down game-on"></span>&nbsp;
+            <span class='game-on' id='countWrong'></span>
     	</div>
     </div>
 
     <div style="clear: both"></div>
 
-    <div class="full-width game-off" style="text-align: center; font-size: large; height: 1.2em; color: #fff; margin-top: 100px;">
-        <button onclick='newGame(); return false;'>Start a New Game</button>
+    <div class="full-width game-off" style="text-align: center; font-size: large; height: 1.2em; color: #fff; margin-top: 10px;">
+        <button style='font-size: 3em; color: #000080; border-radius: 10px; margin: 10%; width: 80%;' onclick='newGame(); return false;'>Start a New Game</button>
+
+        <button style='font-size: 2em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='return false;'>Options</button>
+
     </div>
 
     <div style="clear: both"></div>

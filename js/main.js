@@ -243,5 +243,5 @@ function handlekeyclick (k) {
 
 $(function() {
 	FastClick.attach(document.body);
-});
+}) ();
 

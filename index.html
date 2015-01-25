@@ -58,7 +58,7 @@
     <div class="full-width game-off" style="text-align: center; font-size: large; height: 1.2em; color: #fff; margin-top: 10px;">
         <button style='font-size: 3em; color: #000080; border-radius: 10px; margin: 10%; width: 80%;' onclick='newGame(); return false;'>Start a New Game</button>
 
-        <button style='font-size: 2em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='return false;'>Options</button>
+        <button style='font-size: 2em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='showOptionsDialog(); return false;'>Options</button>
 
     </div>
 
@@ -129,7 +129,7 @@
     </div><!-- /.container -->
 
     <!-- Modal results page -->
-    <div id='modelResultsDlg' class="modal fade" data-backdrop='static'>
+    <div id='modalResultsDlg' class="modal fade" data-backdrop='static'>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -150,6 +150,63 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Modal results page -->
+    <div id='optionsDlg' class="modal fade" data-backdrop='static'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Options</h4>
+        </div>
+        <div class="modal-body">
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="maxOperand" class="col-sm-4 control-label">Max Operand</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="maxOperand">
+                    </div>
+                </div>          
+
+                <div class="form-group">
+                    <label for="maxTime" class="col-sm-4 control-label">Time Limit</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="maxTime">
+                    </div>
+                </div>          
+
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="maxTime" class="control-label">Operations</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="checkbox disabled">
+                            <label>
+                                <input type="checkbox" name="rbOps" value="+" checked disabled>
+                                    Addition
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="rbOps" value="-" checked disabled>
+                                    Subtraction
+                            </label>
+ 
+                            <label>
+                                <input type="checkbox" name="rbOps" value="*" checked disabled>
+                                    Multiplication
+                            </label>
+                        </div>
+                    </div>
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" onClick='return (saveOptionsDialogToConfig());'>Save</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

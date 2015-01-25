@@ -1,14 +1,25 @@
+var GLOBAL_CONFIG = {
+	MAX_MAX_OPERAND: 30,
+	MAX_MAX_TIME: 600
+};
+
+var config = {
+	maxTime: 60,
+	maxOperand: 10,
+	operations: ['a', 's', 'm']
+};
+
 var theGame;
 
 var game = function () {
 
-	var  startTime,
+	var startTime,
 		countCorrect,
 		countWrong,
 		thisN1,
 		thisN2,
-		operation ='*',
-		maxOperand = 12,
+		thisOperation,
+		//maxOperand = 12,
 		liveTimer,
 		gameState;
 	
@@ -36,9 +47,10 @@ var game = function () {
 
 	var eachSecond = function() {
 		// update the time on screen and check for one minute done
-		var remaining  = 3 - Math.round (((new Date()) - startTime)  / 1000);
+		var remaining  = config.maxTime - Math.round (((new Date()) - startTime)  / 1000);
 		updateBGColor (remaining);
-		$("#showTime").html ("0:" + remaining);
+		//$("#showTime").html ("0:" + remaining);
+		$("#showTime").html (getDisplayTime(remaining));
 		if (remaining > 0) {
 			liveTimer = window.setTimeout (eachSecond, 1000);	
 		} else {
@@ -58,15 +70,16 @@ var game = function () {
 	var nextQuestion = function() {
 		$("#txtAnswer").val('');
 		updateAnswerDisplay();
-		thisN1 = Math.floor(Math.random () * maxOperand) + 1;
-		thisN2 = Math.floor(Math.random () * maxOperand) + 1;
+		thisOperation = _getOperation();
+		_getQ ();
+		//_getQ_mult ();
 		showQuestion();
 	};
 
 	var showQuestion = function () {
 		$("#n1").html ("" + thisN1);
 		$("#n2").html ("" + thisN2);
-		$("#operator").html (operation);
+		$("#operator").html (allOperations[thisOperation].name);
 	}
 
 	var endGame = function () {
@@ -76,7 +89,7 @@ var game = function () {
 		gameState = 0;
 		$("#dlgCorrectCount").html('' + countCorrect);
 		$("#dlgWrongCount").html('' + countWrong);		
-		$("#modelResultsDlg").modal('show');
+		$("#modalResultsDlg").modal('show');
 	}
 
 	var handlekeyclick = function (k) {
@@ -104,7 +117,7 @@ var game = function () {
 
 	var handleAnswer = function (a) {
 		var userSaid = parseInt(a);
-		var answer = thisN1 * thisN2;
+		var answer = allOperations[thisOperation].getAnswer (thisN1, thisN2);
 		if (userSaid == answer) {
 			countCorrect++;
 		} else {
@@ -124,11 +137,62 @@ var game = function () {
 		$('#displayAnswer').html (last);
 	};
 
+	var _getQ = function () {
+		console.log (thisOperation);
+		console.log (JSON.stringify (allOperations[thisOperation]));
+		allOperations[thisOperation].questionGenerator();
+	};
+
+	var _getQ_add = function () {
+		thisN1 = Math.floor(Math.random () * config.maxOperand) + 1;
+		thisN2 = Math.floor(Math.random () * config.maxOperand) + 1;
+	};
+
+	var _getQ_mult = _getQ_add;
+
+	var _getQ_sub = function () {
+		thisN1 = Math.floor(Math.random () * config.maxOperand) + 1;
+		thisN2 = Math.floor(Math.random () * thisN1);		
+	};
+
+	var _getOperation = function () {
+		return config.operations[Math.floor(Math.random () * config.operations.length)];
+	};
+
+	var _getAnswer_add = function (x, y) {
+		return x + y;
+	};
+
+	var _getAnswer_sub = function (x, y) {
+		return x - y;
+	};
+
+	var _getAnswer_mult = function (x, y) {
+		return x * y;
+	};
+
+	var allOperations = {
+		a: {questionGenerator: _getQ_add, getAnswer: _getAnswer_add, name: "+"},
+		s: {questionGenerator: _getQ_sub, getAnswer: _getAnswer_sub, name: "-"},
+		m: {questionGenerator: _getQ_mult, getAnswer: _getAnswer_mult, name: "*"}
+	};
+
+	var getDisplayTime = function (secs) {
+		var mins = Math.floor (secs / 60);
+		var secs = secs % 60;
+		if (secs > 9) {
+			return '' + mins + ":" + secs;
+		} else {
+			return '' + mins + ":0" + secs;
+		}
+	};
+
 	return {
 		startGame: startGame,
 		nextQuestion: nextQuestion,
 		init: init,
-		handlekeyclick: handlekeyclick
+		handlekeyclick: handlekeyclick,
+		allOperations: allOperations
 	};
 };
 
@@ -136,6 +200,37 @@ var newGame = function() {
 	theGame = new game();
 	theGame.init();
 	theGame.startGame();
+};
+
+var showOptionsDialog = function () {
+	saveConfigToOptionsDialog();
+	$("#optionsDlg").modal('show');	
+};
+
+var saveConfigToOptionsDialog = function () {
+	$("#maxTime").val (config.maxTime);
+	$("#maxOperand").val (config.maxOperand);
+	//operations: ['a', 's', 'm']
+};
+
+var saveOptionsDialogToConfig = function () {
+	if (optionsAreValid()) {
+		config.maxTime = $("#maxTime").val();
+		config.maxOperand = $("#maxOperand").val ();
+		//operations: ['a', 's', 'm']		
+		$("#optionsDlg").modal('hide');	
+		return true;
+	} else {
+		alert ("Not valid - come on dude.");
+		return false;
+	}
+};
+
+var optionsAreValid = function () {
+	var maxTime = parseInt($("#maxTime").val());
+	var maxOperand = parseInt ($("#maxOperand").val ());
+	return (maxTime > 0 && maxTime < GLOBAL_CONFIG.MAX_MAX_TIME &&
+		maxOperand > 1 && maxOperand < GLOBAL_CONFIG.MAX_MAX_OPERAND);
 };
 
 // Init page
@@ -150,8 +245,3 @@ $(function() {
 	FastClick.attach(document.body);
 });
 
-//var b = document.getElementById('btn1');
-//var h = new Hammer(b);
-//h.on ('tap', function(ev) {
-//	handlekeyclick ("1");
-//});

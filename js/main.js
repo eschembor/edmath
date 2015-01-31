@@ -19,7 +19,6 @@ var game = function () {
 		thisN1,
 		thisN2,
 		thisOperation,
-		//maxOperand = 12,
 		liveTimer,
 		gameState;
 	
@@ -205,6 +204,10 @@ var newGame = function() {
 var showOptionsDialog = function () {
 	saveConfigToOptionsDialog();
 	$("#optionsDlg").modal('show');	
+};
+
+var showAboutDialog = function () {
+	$("#modalAboutDlg").modal('show');	
 };
 
 var saveConfigToOptionsDialog = function () {

@@ -56,9 +56,13 @@
     <div style="clear: both"></div>
 
     <div class="full-width game-off" style="text-align: center; font-size: large; height: 1.2em; color: #fff; margin-top: 10px;">
-        <button style='font-size: 3em; color: #000080; border-radius: 10px; margin: 10%; width: 80%;' onclick='newGame(); return false;'>Start a New Game</button>
+        <button class="btn btn-success" style='height: 6em; font-size: 2em; color: #000080; border-radius: 10px; margin: 10%; width: 80%;' onclick='newGame(); return false;'><span class='glyphicon glyphicon-flash' style='margin-right: 12px;'></span>
+        Start a New Game
+        </button>
 
-        <button style='font-size: 2em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='showOptionsDialog(); return false;'>Options</button>
+        <button class="btn btn-danger" style='font-size: 2em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='showOptionsDialog(); return false;'><span class='glyphicon glyphicon-cog' style='margin-right: 12px;'></span>Options</button>
+
+        <button class="btn btn-info" style='font-size: 2em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='showAboutDialog(); return false;'><span class='glyphicon glyphicon-info-sign' style='margin-right: 12px;'></span>About this App</button>
 
     </div>
 
@@ -147,6 +151,25 @@
                     <td><span id='dlgWrongCount'></span> Incorrect</td>
                 </tr>
             </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Modal About page -->
+    <div id='modalAboutDlg' class="modal fade" data-backdrop='static'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">About big A's Mad Math Minute</h4>
+          </div>
+          <div class="modal-body">
+                <div>Big A's Mad Math Minute is provided free - please enjoy this game responsibly :)</div>
+                <div>This game was create by Andrew S</div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

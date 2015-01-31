@@ -6,7 +6,7 @@ var GLOBAL_CONFIG = {
 var config = {
 	maxTime: 60,
 	maxOperand: 10,
-	operations: ['a', 's', 'm']
+	operations: ['a', 's', 'm', 'd']
 };
 
 var theGame;
@@ -45,10 +45,9 @@ var game = function () {
 	}
 
 	var eachSecond = function() {
-		// update the time on screen and check for one minute done
+		// update the time on screen and check for max time done
 		var remaining  = config.maxTime - Math.round (((new Date()) - startTime)  / 1000);
 		updateBGColor (remaining);
-		//$("#showTime").html ("0:" + remaining);
 		$("#showTime").html (getDisplayTime(remaining));
 		if (remaining > 0) {
 			liveTimer = window.setTimeout (eachSecond, 1000);	
@@ -71,7 +70,6 @@ var game = function () {
 		updateAnswerDisplay();
 		thisOperation = _getOperation();
 		_getQ ();
-		//_getQ_mult ();
 		showQuestion();
 	};
 
@@ -154,6 +152,12 @@ var game = function () {
 		thisN2 = Math.floor(Math.random () * thisN1);		
 	};
 
+	var _getQ_div = function () {
+		var tempAnswer = Math.floor(Math.random () * config.maxOperand) + 1;
+		thisN2 = Math.floor(Math.random () * config.maxOperand) + 1;
+		thisN1 = Math.floor(tempAnswer * thisN2);
+	};
+
 	var _getOperation = function () {
 		return config.operations[Math.floor(Math.random () * config.operations.length)];
 	};
@@ -170,10 +174,15 @@ var game = function () {
 		return x * y;
 	};
 
+	var _getAnswer_div = function (x, y) {
+		return Math.floor(x / y);
+	};
+
 	var allOperations = {
 		a: {questionGenerator: _getQ_add, getAnswer: _getAnswer_add, name: "+"},
 		s: {questionGenerator: _getQ_sub, getAnswer: _getAnswer_sub, name: "-"},
-		m: {questionGenerator: _getQ_mult, getAnswer: _getAnswer_mult, name: "*"}
+		m: {questionGenerator: _getQ_mult, getAnswer: _getAnswer_mult, name: "*"},
+		d: {questionGenerator: _getQ_div, getAnswer: _getAnswer_div, name: "/"}
 	};
 
 	var getDisplayTime = function (secs) {
@@ -213,14 +222,12 @@ var showAboutDialog = function () {
 var saveConfigToOptionsDialog = function () {
 	$("#maxTime").val (config.maxTime);
 	$("#maxOperand").val (config.maxOperand);
-	//operations: ['a', 's', 'm']
 };
 
 var saveOptionsDialogToConfig = function () {
 	if (optionsAreValid()) {
 		config.maxTime = $("#maxTime").val();
 		config.maxOperand = $("#maxOperand").val ();
-		//operations: ['a', 's', 'm']		
 		$("#optionsDlg").modal('hide');	
 		return true;
 	} else {

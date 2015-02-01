@@ -135,8 +135,6 @@ var game = function () {
 	};
 
 	var _getQ = function () {
-		console.log (thisOperation);
-		console.log (JSON.stringify (allOperations[thisOperation]));
 		allOperations[thisOperation].questionGenerator();
 	};
 
@@ -222,16 +220,23 @@ var showAboutDialog = function () {
 var saveConfigToOptionsDialog = function () {
 	$("#maxTime").val (config.maxTime);
 	$("#maxOperand").val (config.maxOperand);
+	$("input[name=rbOps]").each (function() {
+		$(this).prop ('checked', jQuery.inArray($(this).val(), config.operations) > -1);
+	});	
 };
 
 var saveOptionsDialogToConfig = function () {
 	if (optionsAreValid()) {
 		config.maxTime = $("#maxTime").val();
 		config.maxOperand = $("#maxOperand").val ();
+		config.operations=[];
+		$("input[name=rbOps]:checked").each (function() {
+			config.operations.push ($(this).val());
+		});
 		$("#optionsDlg").modal('hide');	
 		return true;
 	} else {
-		alert ("Not valid - come on dude.");
+		alert ("Options are not valid.");
 		return false;
 	}
 };
@@ -239,8 +244,13 @@ var saveOptionsDialogToConfig = function () {
 var optionsAreValid = function () {
 	var maxTime = parseInt($("#maxTime").val());
 	var maxOperand = parseInt ($("#maxOperand").val ());
+	var theseOperations = [];
+	$("input[name=rbOps]:checked").each (function() {
+		theseOperations.push ($(this).val());
+	});	
 	return (maxTime > 0 && maxTime < GLOBAL_CONFIG.MAX_MAX_TIME &&
-		maxOperand > 1 && maxOperand < GLOBAL_CONFIG.MAX_MAX_OPERAND);
+		maxOperand > 1 && maxOperand < GLOBAL_CONFIG.MAX_MAX_OPERAND &&
+		theseOperations.join(';') !== '');
 };
 
 // Init page
@@ -253,5 +263,5 @@ function handlekeyclick (k) {
 
 $(function() {
 	FastClick.attach(document.body);
-}) ();
+});
 

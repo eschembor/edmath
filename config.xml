@@ -11,6 +11,7 @@
         All 4 Fun Mad Math Minute.
     </description>
 
+    <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
 
 </widget>

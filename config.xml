@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.all4funsoftware.math"
+        version   = "1.0.0">
+
+    <name>All4Fun - Mad Math Minute</name>
+
+    <description>
+        All 4 Fun Mad Math Minute.
+    </description>
+
+    <gap:plugin name="org.apache.cordova.vibration" />
+
+</widget>

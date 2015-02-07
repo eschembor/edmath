@@ -118,7 +118,8 @@ var game = function () {
 		if (userSaid == answer) {
 			countCorrect++;
 		} else {
-			countWrong++
+			countWrong++;
+			navigator.notification.vibrate(700);
 		}
 		updateCountDisplay();
 		nextQuestion();

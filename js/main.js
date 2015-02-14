@@ -6,7 +6,7 @@ var GLOBAL_CONFIG = {
 var config = {
 	maxTime: 60,
 	maxOperand: 10,
-	operations: ['a', 's', 'm', 'd']
+	operations: ['a', 's', 'm', 'd', 'q', 'sq']
 };
 
 var theGame;
@@ -74,9 +74,13 @@ var game = function () {
 	};
 
 	var showQuestion = function () {
-		$("#n1").html ("" + thisN1);
-		$("#n2").html ("" + thisN2);
-		$("#operator").html (allOperations[thisOperation].name);
+		var q;
+		if (allOperations[thisOperation].prefixOp) {
+			q = allOperations[thisOperation].name + "&nbsp;" + thisN1 + "&nbsp;" + (thisN2 === undefined ? "" : "" + thisN2);
+		} else {
+			q = "" + thisN1 + "&nbsp;" + allOperations[thisOperation].name + "&nbsp;" + (thisN2 === undefined ? "" : "" + thisN2);
+		}
+		$("#question").html (q);
 	}
 
 	var endGame = function () {
@@ -119,7 +123,9 @@ var game = function () {
 			countCorrect++;
 		} else {
 			countWrong++;
-			navigator.notification.vibrate(700);
+			if (navigator && navigator.notification && navigator.notification.vibrate) {
+				navigator.notification.vibrate(700);				
+			}	
 		}
 		updateCountDisplay();
 		nextQuestion();
@@ -157,6 +163,17 @@ var game = function () {
 		thisN1 = Math.floor(tempAnswer * thisN2);
 	};
 
+	var _getQ_sqrt = function () {
+		var tempAnswer = Math.floor(Math.random () * config.maxOperand) + 1;
+		thisN1 = tempAnswer * tempAnswer;
+		thisN2 = undefined;
+	};
+
+	var _getQ_square = function () {
+		thisN1 = Math.floor(Math.random () * config.maxOperand) + 1;
+		thisN2 = undefined;
+	};
+
 	var _getOperation = function () {
 		return config.operations[Math.floor(Math.random () * config.operations.length)];
 	};
@@ -177,11 +194,21 @@ var game = function () {
 		return Math.floor(x / y);
 	};
 
+	var _getAnswer_sqrt = function (x) {
+		return Math.floor (Math.sqrt(x));
+	};
+
+	var _getAnswer_square = function (x) {
+		return x*x;
+	};
+
 	var allOperations = {
 		a: {questionGenerator: _getQ_add, getAnswer: _getAnswer_add, name: "+"},
 		s: {questionGenerator: _getQ_sub, getAnswer: _getAnswer_sub, name: "-"},
 		m: {questionGenerator: _getQ_mult, getAnswer: _getAnswer_mult, name: "*"},
-		d: {questionGenerator: _getQ_div, getAnswer: _getAnswer_div, name: "/"}
+		d: {questionGenerator: _getQ_div, getAnswer: _getAnswer_div, name: "/"},
+		q: {questionGenerator: _getQ_sqrt, getAnswer: _getAnswer_sqrt, name: "&radic;", prefixOp: true},
+		sq: {questionGenerator: _getQ_square, getAnswer: _getAnswer_square, name: "<sup>2</sup>"}
 	};
 
 	var getDisplayTime = function (secs) {

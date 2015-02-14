@@ -71,6 +71,7 @@
     <div class="container game-on">
 
     <h1 class='game-on' style="text-align: center">
+        <span id='question'></span>
         <span id='n1'></span>&nbsp;
         <span id='operator'></span>&nbsp;
         <span id='n2'></span>
@@ -81,50 +82,50 @@
     <div class="keyboard">
     <div class="keyboardrow">
         <div class="col-xs-4 col-sm-4">
-		    <button ontouchstart='handlekeyclick("1");' ondblclick='handlekeyclick("X");'>1</button>
+		    <button onclick='handlekeyclick("1")' ontouchstart='handlekeyclick("1");'>1</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("2");'>2</button>
+            <button onclick='handlekeyclick("2")' ontouchstart='handlekeyclick("2");'>2</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("3");'>3</button>
-        </div>
-	</div>
-
-    <div class="keyboardrow">
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("4");'>4</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("5");'>5</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("6");'>6</button>
-        </div>
-	</div>
-
-
-    <div class="keyboardrow">
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("7");'>7</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("8");'>8</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("9");'>9</button>
+            <button onclick='handlekeyclick("3")' ontouchstart='handlekeyclick("3");'>3</button>
         </div>
 	</div>
 
     <div class="keyboardrow">
         <div class="col-xs-4 col-sm-4">
-            <button class="btn btn-danger" ontouchstart='handlekeyclick("DEL");'>DEL</button>
+            <button onclick='handlekeyclick("4")' ontouchstart='handlekeyclick("4");'>4</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("0");'>0</button>
+            <button onclick='handlekeyclick("5")' ontouchstart='handlekeyclick("5");'>5</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button class="btn btn-success" ontouchstart='handlekeyclick("ANSWER");'>OK</button>
+            <button onclick='handlekeyclick("6")' ontouchstart='handlekeyclick("6");'>6</button>
+        </div>
+	</div>
+
+
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("7")' ontouchstart='handlekeyclick("7");'>7</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("8")' ontouchstart='handlekeyclick("8");'>8</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("9")' ontouchstart='handlekeyclick("9");'>9</button>
+        </div>
+	</div>
+     
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button class="btn btn-danger" onclick='handlekeyclick("DEL");' ontouchstart='handlekeyclick("DEL");'>DEL</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button onclick='handlekeyclick("0");' ontouchstart='handlekeyclick("0");'>0</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button class="btn btn-success" onclick='handlekeyclick("ANSWER")' ontouchstart='handlekeyclick("ANSWER");'>OK</button>
         </div>
 	</div>
 
@@ -227,6 +228,17 @@
                                 <input type="checkbox" name="rbOps" value="d" checked>
                                     Division
                             </label>
+
+                            <label>
+                                <input type="checkbox" name="rbOps" value="sq" checked>
+                                    Squares
+                            </label>
+
+                            <label>
+                                <input type="checkbox" name="rbOps" value="q" checked>
+                                    Square Roots
+                            </label>
+
                         </div>
                     </div>
                 </div>

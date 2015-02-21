@@ -1,3 +1,72 @@
+.title-bar {
+	text-align: center; 
+	background-color: #c0c0c0;
+	font-size: x-large;
+	height: 1.3em;
+	color: #000;
+	font-weight: bold;
+}
+
+.score-bar {
+	background-color: #c0c0c0;
+	font-size: x-large;
+	height: 1.5em;
+	color: #fff;
+}
+
+.score  {
+	float: left;
+	text-align: right;
+	float: right;
+	padding-right: 20px;
+}
+
+.score-yes {
+	margin-top: 4px;
+	color: #008000;
+}
+
+.score-no {
+	margin-top: 4px;
+	color: #ff0000;
+}
+
+.timer {
+	float: left;
+	padding-left: 20px;
+}
+
+
+.start-panel {
+	text-align: center;
+	font-size: large;
+	height: 1.2em;
+	color: #fff;
+	margin-top: 10px;
+}
+
+.start-panel-newgame {
+	height: 6em;
+	font-size: 2em;
+	color: #000080;
+	border-radius: 10px;
+	margin: 10%;
+	width: 80%;
+	white-space:normal;
+}
+
+.start-panel-options {
+	font-size: 1.4em;
+	color: #303030;
+	border-radius: 10px;
+	margin: 10%;
+	width: 80%;
+}
+
+.start-panel-icon, button.start-pannel-options span {
+	padding-right: 12px;
+}
+
 .keyboardrow div button {
 	width: 99%;
 	height: 80px;
@@ -19,6 +88,10 @@
 
 #countWrong {
 	color: #FF0000;
+}
+
+.about-dlg-info {
+	margin: 20px;
 }
 
 /* Override */

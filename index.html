@@ -28,41 +28,45 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
 
     <input type='text' id='txtAnswer' style='display:none' />
 
-    <div class="full-width game-off" style="text-align: center; background-color: #c0c0c0; font-size: x-large; height: 1.3em; color: #000; font-weight: bold;">
+    <div class="full-width game-off title-bar">
     All4Fun - Mad Math Minute!
     </div>
 
-    <div class="full-width game-on" style="background-color: #c0c0c0; font-size: x-large; height: 1.5em; color: #fff;">
-	    <div class="timer" style="float: left; padding-left: 20px">
-            <span style='margin-top: 2px;' class="glyphicon glyphicon-time game-on"></span>&nbsp;
+    <div class="full-width game-on score-bar">
+	    <div class="timer">
+            <span class="glyphicon glyphicon-time game-on"></span>&nbsp;
             <span id='showTime' class='game-on'></span>
         </div>
 
-    	<div class="score" style="float: left; text-align: right; float: right; padding-right: 20px">
-            <span style='margin-top: 4px; color: #008000;' class="glyphicon glyphicon-thumbs-up game-on"></span>&nbsp;
+    	<div class="score">
+            <span class="glyphicon glyphicon-thumbs-up game-on score-yes"></span>&nbsp;
             <span class='game-on' id='countCorrect'></span>
             &nbsp;&nbsp;&nbsp;
-            <span style='margin-top: 4px; color: #ff0000;' class="glyphicon glyphicon-thumbs-down game-on"></span>&nbsp;
+            <span class="glyphicon glyphicon-thumbs-down game-on score-no"></span>&nbsp;
             <span class='game-on' id='countWrong'></span>
     	</div>
     </div>
 
     <div style="clear: both"></div>
 
-    <div class="full-width game-off" style="text-align: center; font-size: large; height: 1.2em; color: #fff; margin-top: 10px;">
-        <button class="btn btn-success" style='height: 6em; font-size: 2em; color: #000080; border-radius: 10px; margin: 10%; width: 80%; white-space:normal' onclick='newGame(); return false;'>
+    <div class="full-width game-off start-panel">
+        <button class="btn btn-success start-panel-newgame" onclick='newGame(); return false;'>
         Start a New Game
         </button>
 
-        <button class="btn btn-danger" style='font-size: 1.4em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='showOptionsDialog(); return false;'><span class='glyphicon glyphicon-cog' style='margin-right: 12px;'></span>Options</button>
+        <button class="btn btn-danger start-panel-options" onclick='showOptionsDialog(); return false;'>
+            <span class='glyphicon glyphicon-cog start-panel-icon'></span>Options
+        </button>
 
-        <button class="btn btn-info" style='font-size: 1.4em; color: #303030; border-radius: 10px; margin: 10%; width: 80%;' onclick='showAboutDialog(); return false;'><span class='glyphicon glyphicon-info-sign' style='margin-right: 12px;'></span>About this App</button>
+        <button class="btn btn-info start-panel-options" onclick='showAboutDialog(); return false;'>
+            <span class='glyphicon glyphicon-info-sign start-panel-icon'></span>About this App
+        </button>
 
     </div>
 
@@ -81,50 +85,50 @@
     <div class="keyboard">
     <div class="keyboardrow">
         <div class="col-xs-4 col-sm-4">
-		    <button ontouchstart='handlekeyclick("1");' ondblclick='handlekeyclick("X");'>1</button>
+		    <button id='btn_1'>1</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("2");'>2</button>
+            <button id='btn_2'>2</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("3");'>3</button>
-        </div>
-	</div>
-
-    <div class="keyboardrow">
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("4");'>4</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("5");'>5</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("6");'>6</button>
-        </div>
-	</div>
-
-
-    <div class="keyboardrow">
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("7");'>7</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("8");'>8</button>
-        </div>
-        <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("9");'>9</button>
+            <button id='btn_3'>3</button>
         </div>
 	</div>
 
     <div class="keyboardrow">
         <div class="col-xs-4 col-sm-4">
-            <button class="btn btn-danger" ontouchstart='handlekeyclick("DEL");'>DEL</button>
+            <button id='btn_4'>4</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button ontouchstart='handlekeyclick("0");'>0</button>
+            <button id='btn_5'>5</button>
         </div>
         <div class="col-xs-4 col-sm-4">
-            <button class="btn btn-success" ontouchstart='handlekeyclick("ANSWER");'>OK</button>
+            <button id='btn_6'>6</button>
+        </div>
+	</div>
+
+
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button id='btn_7'>7</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button id='btn_8'>8</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button id='btn_9'>9</button>
+        </div>
+	</div>
+
+    <div class="keyboardrow">
+        <div class="col-xs-4 col-sm-4">
+            <button class="btn btn-danger" id='btn_DEL'>DEL</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button id='btn_0'>0</button>
+        </div>
+        <div class="col-xs-4 col-sm-4">
+            <button class="btn btn-success" id='btn_ANSWER'>OK</button>
         </div>
 	</div>
 
@@ -168,7 +172,7 @@
             <h4 class="modal-title">About All4Fun's Mad Math Minute</h4>
           </div>
           <div class="modal-body">
-                <div style='margin: 20px;'>All4Fun's Mad Math Minute is provided free - please enjoy this game responsibly :)</div>
+                <div class='about-dlg-info'>All4Fun's Mad Math Minute is provided free - please enjoy this game responsibly :)</div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

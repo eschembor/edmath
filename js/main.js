@@ -119,7 +119,9 @@ var game = function () {
 			countCorrect++;
 		} else {
 			countWrong++;
-			navigator.notification.vibrate(700);
+			if (navigator.notification && navigator.notification.vibrate) {
+				navigator.notification.vibrate(700);
+			}
 		}
 		updateCountDisplay();
 		nextQuestion();
@@ -262,7 +264,17 @@ function handlekeyclick (k) {
 	}
 }
 
+function fnKeyclick () {
+	var thisId = $(this).attr("id");
+	if (thisId) {
+		handlekeyclick (thisId.split('_')[1]);
+	}
+}
+
 $(function() {
+	//var eventName = 'touchstart';
+	var eventName = 'click';
+	$(".keyboardrow button[id]").on (eventName, fnKeyclick);
 	FastClick.attach(document.body);
 });
 

@@ -94,6 +94,24 @@
 	margin: 20px;
 }
 
+/* Review quesion/answers section of results dialog */
+.reviewSection table {
+	width: 80%;
+	margin: 10px auto 10px auto;
+	border: 1px solid #800000;
+}
+
+.reviewSection table thead th {
+	background-color: #800000;
+	color: #fff;
+	font-weight: bold;
+}
+
+.reviewSection table tr td {
+	font-weight: normal;
+	color: #800000;
+}
+
 /* Override */
 .col-xs-4, .col-sm-4 {
 	padding-left: 1px;

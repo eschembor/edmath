@@ -16,6 +16,7 @@ var game = function () {
 	var startTime,
 		countCorrect,
 		countWrong,
+		wrongAnswers,
 		thisN1,
 		thisN2,
 		thisOperation,
@@ -29,6 +30,7 @@ var game = function () {
 		gameState = 1;
 		startTime = new Date();
 		countCorrect = countWrong = 0;
+		wrongAnswers = [];
 		updateCountDisplay();
 		startTimer();
 		nextQuestion();
@@ -74,14 +76,9 @@ var game = function () {
 	};
 
 	var showQuestion = function () {
-		var q;
-		if (allOperations[thisOperation].prefixOp) {
-			q = allOperations[thisOperation].name + "&nbsp;" + thisN1 + "&nbsp;" + (thisN2 === undefined ? "" : "" + thisN2);
-		} else {
-			q = "" + thisN1 + "&nbsp;" + allOperations[thisOperation].name + "&nbsp;" + (thisN2 === undefined ? "" : "" + thisN2);
-		}
+		var q = getQuestionAsHtml (thisOperation, thisN1, thisN2);
 		$("#question").html (q);
-	}
+	};
 
 	var endGame = function () {
 		$(".game-off").show();		
@@ -89,9 +86,10 @@ var game = function () {
 		$(".keyboardrow div").css ("background-color", "#fff");
 		gameState = 0;
 		$("#dlgCorrectCount").html('' + countCorrect);
-		$("#dlgWrongCount").html('' + countWrong);		
+		$("#dlgWrongCount").html('' + countWrong);
+		$("#reviewSection").hide();
 		$("#modalResultsDlg").modal('show');
-	}
+	};
 
 	var handlekeyclick = function (k) {
 		var last;
@@ -125,7 +123,14 @@ var game = function () {
 			countWrong++;
 			if (navigator && navigator.notification && navigator.notification.vibrate) {
 				navigator.notification.vibrate(700);				
-			}	
+			}
+			wrongAnswers.push ({
+				operation: thisOperation, 
+				n1: thisN1, 
+				n2: thisN2, 
+				userAnswer: userSaid, 
+				correctAnswer: answer
+			});
 		}
 		updateCountDisplay();
 		nextQuestion();
@@ -211,6 +216,18 @@ var game = function () {
 		sq: {questionGenerator: _getQ_square, getAnswer: _getAnswer_square, name: "<sup>2</sup>"}
 	};
 
+	var getQuestionAsHtml = function (operation, n1, n2) {
+		var q = '';
+		if (allOperations[operation].prefixOp) {
+			q = allOperations[operation].name + "&nbsp;" + 
+				n1 + "&nbsp;" + (n2 === undefined ? "" : "" + n2);
+		} else {
+			q = "" + n1 + "&nbsp;" + allOperations[operation].name + 
+				"&nbsp;" + (n2 === undefined ? "" : "" + n2);
+		}
+		return q;
+	};
+
 	var getDisplayTime = function (secs) {
 		var mins = Math.floor (secs / 60);
 		var secs = secs % 60;
@@ -221,12 +238,19 @@ var game = function () {
 		}
 	};
 
+	var getWrongAnswers = function () {
+		console.log ("Get Wrong: " + JSON.stringify (wrongAnswers));		
+		return wrongAnswers;
+	};
+
 	return {
 		startGame: startGame,
 		nextQuestion: nextQuestion,
 		init: init,
 		handlekeyclick: handlekeyclick,
-		allOperations: allOperations
+		allOperations: allOperations,
+		getWrongAnswers: getWrongAnswers,
+		getQuestionAsHtml: getQuestionAsHtml
 	};
 };
 
@@ -243,6 +267,13 @@ var showOptionsDialog = function () {
 
 var showAboutDialog = function () {
 	$("#modalAboutDlg").modal('show');	
+};
+
+var showReviewDetails = function() {
+	var wrongAnswers = theGame.getWrongAnswers();
+	console.log ("Wrong in show rev details: " + JSON.stringify (wrongAnswers));
+	$("#reviewSection").html (getWrongAnswersTable(wrongAnswers));
+	$("#reviewSection").toggle(700);
 };
 
 var saveConfigToOptionsDialog = function () {
@@ -295,6 +326,33 @@ function fnKeyclick () {
 		handlekeyclick (thisId.split('_')[1]);
 	}
 }
+
+var _wrongAnswersTableHeader = function () {
+	return "<thead><tr><th>Problem</th><th>Correct Answer</th><th>Your Answer</th></tr></thead>";
+};
+
+var _wrongAnswerTemplate = function (answer) {
+	return "<tr><td>" + theGame.getQuestionAsHtml (answer.operation, answer.n1, answer.n2) + 
+		"</td><td>" + answer.correctAnswer + 
+		"</td><td>" + (isNaN(answer.userAnswer) ? 'No Answer' : answer.userAnswer)  + "</td></tr>";
+};
+
+var _wrongAnswersTableBody = function (wrongAnswers) {
+	var html = wrongAnswers.reduce (function(p,n) {return p + _wrongAnswerTemplate(n);}, '');
+	return html;
+};
+
+function getWrongAnswersTable (wrongAnswers) {
+	console.log ("Wrong in table: " + JSON.stringify (wrongAnswers));
+
+	var html = "<table>";
+	if (wrongAnswers) {
+		html += _wrongAnswersTableHeader();
+		html += _wrongAnswersTableBody (wrongAnswers);
+	}
+	html += "</table>";
+	return html;
+};
 
 $(function() {
 	//var eventName = 'touchstart';

@@ -153,9 +153,30 @@
                 </tr>
                 <tr style='color: red'>
                     <td class='glyphicon glyphicon-thumbs-down'></td>
-                    <td><span id='dlgWrongCount'></span> Incorrect</td>
+                    <td><span id='dlgWrongCount'></span> Incorrect
+                        [<a href='#' onclick='showReviewDetails();return false;'>review</a>]
+                    </td>
                 </tr>
             </table>
+            <div id='reviewSection' class='reviewSection' style='display:none;'>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Modal wrong review page -->
+    <div id='modalReviewDlg' class="modal fade" data-backdrop='static'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">The following were answered incorrectly:</h4>
+          </div>
+          <div id='wrongReviewTable' class="modal-body">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

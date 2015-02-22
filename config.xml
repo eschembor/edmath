@@ -14,4 +14,6 @@
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
 
+	<preference name="permissions" value="none"/>
+	<preference name="Orientation" value="landscape" />
 </widget>

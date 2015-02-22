@@ -354,9 +354,12 @@ function getWrongAnswersTable (wrongAnswers) {
 	return html;
 };
 
+function isMobileDevice () {
+	return (navigator && navigator.notification && navigator.notification.vibrate);
+}
+
 $(function() {
-	//var eventName = 'touchstart';
-	var eventName = 'click';
+	var eventName = isMobileDevice() ? 'touchstart' : 'click';
 	$(".keyboardrow button[id]").on (eventName, fnKeyclick);
 	FastClick.attach(document.body);
 });

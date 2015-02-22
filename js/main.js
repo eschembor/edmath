@@ -360,6 +360,7 @@ function isMobileDevice () {
 
 $(function() {
 	var eventName = isMobileDevice() ? 'touchstart' : 'click';
+	alert (eventName);
 	$(".keyboardrow button[id]").on (eventName, fnKeyclick);
 	FastClick.attach(document.body);
 });

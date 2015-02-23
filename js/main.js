@@ -359,8 +359,8 @@ function isMobileDevice () {
 }
 
 $(function() {
-	var eventName = isMobileDevice() ? 'touchstart' : 'click';
-	alert (eventName);
+	//var eventName = isMobileDevice() ? 'touchstart' : 'click';
+	var eventName = 'touchstart';
 	$(".keyboardrow button[id]").on (eventName, fnKeyclick);
 	FastClick.attach(document.body);
 }) ();
